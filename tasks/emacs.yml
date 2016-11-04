@@ -1,0 +1,13 @@
+- block:
+  - name: "Install emacs"
+    apt:
+      name: emacs
+
+  - name: "Install emacs goodies"
+    apt:
+      name: emacs-goodies-el
+  become: true
+
+- name: "Checkout emacs config"
+  git: repo=https://github.com/tf/emacs-config
+       dest=~/.emacs.d

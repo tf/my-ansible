@@ -1,0 +1,13 @@
+- name: "Checkout dotfiles repository"
+  git: repo=https://github.com/tf/dotfiles dest=~/.dotfiles
+
+- name: "Create symlinks for dotfiles"
+  file: src=~/.dotfiles/.{{item}}
+        dest=~/.{{item}}
+        state=link
+  with_items:
+    - gitconfig
+    - gitignore_global
+    - profile.d
+    - gemrc
+    - ssh/config

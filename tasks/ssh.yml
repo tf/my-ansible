@@ -1,0 +1,15 @@
+- name: "Install ssh daemon"
+  apt:
+    name: openssh-server
+  become: yes
+
+- name: "Allow dsa keys"
+  lineinfile: dest=/etc/ssh/sshd_config
+              insertafter=EOF
+              line="PubkeyAcceptedKeyTypes=+ssh-dss"
+              state=present
+  become: yes
+  notify: Restart ssh
+
+- authorized_key: user=tfischbach
+                  key="{{ lookup('file', 'files/tim@x220.pub') }}"
