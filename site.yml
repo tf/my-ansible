@@ -3,6 +3,10 @@
     nginx_proxy_sites:
       - name: dedicated-pageflow.dev
         port: 5100
+      - name: hosted-pageflow.dev
+        port: 5101
+      - name: wdr-pageflow.dev
+        port: 5102
 
   tasks:
     - include: tasks/ssh.yml
