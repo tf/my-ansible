@@ -1,0 +1,40 @@
+- hosts: all
+  vars:
+    nginx_proxy_sites:
+      - name: dedicated-pageflow.dev
+        port: 5100
+
+  tasks:
+    - include: tasks/ssh.yml
+    - include: tasks/git.yml
+
+    - include: tasks/chrome.yml
+    - include: tasks/spotify.yml
+
+    - include: tasks/dotfiles.yml
+    - include: tasks/emacs.yml
+    - include: tasks/pass.yml
+
+    - include: tasks/dnsmasq.yml
+    - include: tasks/mysql.yml
+    - include: tasks/nginx.yml
+    - include: tasks/redis.yml
+
+  handlers:
+    - include: handlers/dnsmasq.yml
+    - include: handlers/ssh.yml
+    - include: handlers/nginx.yml
+
+  roles:
+    - { role: rvm_io.rvm1-ruby,
+        rvm1_rubies: ['ruby-2.3.1'],
+        rvm1_install_flags: '--auto-dotfiles --user-install',
+        rvm1_install_path: '/home/{{ ansible_ssh_user }}/.rvm',
+        rvm1_user: 'tfischbach',
+        rvm1_rvm_check_for_updates: false
+      }
+    - role: leonidas.nvm
+      nvm:
+        user: 'tfischbach'
+        version: HEAD
+        node_version: '6.9'

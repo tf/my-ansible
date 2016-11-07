@@ -9,5 +9,5 @@
   become: true
 
 - name: "Checkout emacs config"
-  git: repo=https://github.com/tf/emacs-config
+  git: repo=git@github.com:tf/emacs-config
        dest=~/.emacs.d

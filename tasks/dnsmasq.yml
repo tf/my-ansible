@@ -1,0 +1,9 @@
+- name: Install dnsmasq package
+  apt: name=dnsmasq state=installed update_cache=yes
+  become: yes
+
+- name: Setup dev domains to resolve to localhost
+  template: src=templates/dnsmasq_dev_tld.j2
+            dest=/etc/dnsmasq.d/dev-tld
+  become: yes
+  notify: Restart dnsmasq

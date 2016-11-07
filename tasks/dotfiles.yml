@@ -1,5 +1,5 @@
 - name: "Checkout dotfiles repository"
-  git: repo=https://github.com/tf/dotfiles dest=~/.dotfiles
+  git: repo=git@github.com:tf/dotfiles dest=~/.dotfiles
 
 - name: "Create symlinks for dotfiles"
   file: src=~/.dotfiles/.{{item}}
@@ -11,3 +11,9 @@
     - profile.d
     - gemrc
     - ssh/config
+
+- name: "Source .profile.d files from .profile"
+  lineinfile: dest=~/.profile
+              insertafter=EOF
+              line="for conf in ~/.profile.d/*[^~]; do . $conf; done"
+              state=present

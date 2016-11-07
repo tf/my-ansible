@@ -1,6 +1,6 @@
 # My Ansible
 
-Ansible Playbook to Setup My Computer
+Ansible Playbook to setup my computer
 
 ## Usage
 

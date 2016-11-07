@@ -1,0 +1,7 @@
+- name: "Install pass"
+  apt: name=pass
+  become: true
+
+- name: "Checkout password store"
+  git: repo=git@gitlab.codevise.de:ops/pass
+       dest=~/.password-store
