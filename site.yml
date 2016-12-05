@@ -13,6 +13,7 @@
     - include: tasks/git.yml
 
     - include: tasks/chrome.yml
+    - include: tasks/docker.yml
     - include: tasks/spotify.yml
 
     - include: tasks/dotfiles.yml

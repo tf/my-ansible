@@ -1,0 +1,27 @@
+- block:
+  - name: Rum uname -s
+    command: 'uname -s'
+    register: docker_uname_s
+    changed_when: False
+
+  - name: Rum uname -m
+    command: 'uname -m'
+    register: docker_uname_m
+    changed_when: False
+
+  - name: "Add docker apt key"
+    apt_key: keyserver=hkp://ha.pool.sks-keyservers.net:80 id=58118E89F3A912897C070ADBF76221572C52609D
+
+  - name: "Add docker apt repository"
+    apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-xenial main'
+
+  - name: "Install docker"
+    apt: name=docker-engine state=installed update_cache=yes
+
+  - name: "Install docker-compose"
+    get_url:
+      url: https://github.com/docker/compose/releases/download/1.9.0/docker-compose-{{ docker_uname_s.stdout }}-{{ docker_uname_m.stdout }}
+      dest: /usr/local/bin/docker-compose
+      mode: 0555
+
+  become: yes
