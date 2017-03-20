@@ -1,17 +1,19 @@
-- name: Install the Nginx package
-  apt: name=nginx state=installed update_cache=yes
-  become: yes
+- block:
+  - name: Install the Nginx package
+    apt: name=nginx state=installed update_cache=yes
 
-- name: Create proxies for Rails apps.
-  template: src=templates/nginx_proxy_site.j2
-            dest=/etc/nginx/sites-available/{{ item.name }}
-  with_items: "{{ nginx_proxy_sites }}"
-  become: yes
+  - name: Create proxies for Rails apps.
+    template: src=templates/nginx_proxy_site.j2
+              dest=/etc/nginx/sites-available/{{ item.name }}
+    with_items: "{{ nginx_proxy_sites }}"
 
-- name: Enable proxies for Rails apps.
-  file: src=/etc/nginx/sites-available/{{ item.name }}
-        dest=/etc/nginx/sites-enabled/{{ item.name }}
-        state=link
-  with_items: "{{ nginx_proxy_sites }}"
+  - name: Enable proxies for Rails apps.
+    file: src=/etc/nginx/sites-available/{{ item.name }}
+          dest=/etc/nginx/sites-enabled/{{ item.name }}
+          state=link
+    with_items: "{{ nginx_proxy_sites }}"
+    notify: Reload Nginx
+
   become: yes
-  notify: Reload Nginx
+  tags:
+    - nginx
