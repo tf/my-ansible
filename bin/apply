@@ -3,5 +3,6 @@ ansible-playbook --inventory-file="localhost," \
                  --connection=local \
                  --ask-become-pass \
                  --extra-vars=@vars/secrets.yml \
+                 $* \
                  site.yml
 
