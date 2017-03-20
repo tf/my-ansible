@@ -24,4 +24,12 @@
       dest: /usr/local/bin/docker-compose
       mode: 0555
 
+  - name: "Add user to docker group"
+    user:
+      name: tfischbach
+      groups: docker
+      append: yes
+
   become: yes
+  tags:
+    - docker
