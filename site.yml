@@ -11,6 +11,15 @@
         server_name: wdr-digit.dev swr-digit.dev
         port: 5200
 
+    gh_repositories:
+      - name: pageflow
+      - name: pageflow-chart
+      - name: pageflow-internal-links
+      - name: pageflow-outline-navigation-bar
+      - name: pageflow-linkmap-page
+      - name: pageflow-panorama
+      - name: pageflow-new-pages-box
+
   tasks:
     - include: tasks/ssh.yml
     - include: tasks/git.yml
@@ -22,6 +31,8 @@
     - include: tasks/dotfiles.yml
     - include: tasks/emacs.yml
     - include: tasks/pass.yml
+
+    - include: tasks/gh_repositories.yml
 
     - include: tasks/dnsmasq.yml
     - include: tasks/mysql.yml

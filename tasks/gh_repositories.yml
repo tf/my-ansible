@@ -1,0 +1,46 @@
+- block:
+  - name: "Create code/gh directory"
+    file:
+      path: ~/code/gh
+      state: directory
+
+  - name: "Checkout repository"
+    git:
+      repo: git@github.com:tf/{{ item.name }}
+      dest: ~/code/gh/{{ item.name }}
+      update: no
+    with_items: "{{ gh_repositories }}"
+
+  - name: "Add upstream remote url"
+    git_config:
+      name: remote.upstream.url
+      value: git@github.com:codevise/{{ item.name }}
+      repo: ~/code/gh/{{ item.name }}
+      scope: local
+    with_items: "{{ gh_repositories }}"
+  - name: "Add upstream remote fetch"
+    git_config:
+      name: remote.upstream.fetch
+      value: +refs/heads/*:refs/remotes/upstream/*
+      repo: ~/code/gh/{{ item.name }}
+      scope: local
+    with_items: "{{ gh_repositories }}"
+
+  - name: "Add edge remote url"
+    git_config:
+      name: remote.edge.url
+      value: git@gitlab.codevise.de:edge/{{ item.name }}
+      repo: ~/code/gh/{{ item.name }}
+      scope: local
+    with_items: "{{ gh_repositories }}"
+
+  - name: "Add edge remote fetch"
+    git_config:
+      name: remote.edge.fetch
+      value: +refs/heads/*:refs/remotes/edge/*
+      repo: ~/code/gh/{{ item.name }}
+      scope: local
+    with_items: "{{ gh_repositories }}"
+
+  tags:
+    - gh_repositories
