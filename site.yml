@@ -14,6 +14,7 @@
     gh_repositories:
       - name: pageflow
       - name: pageflow-chart
+      - name: pageflow-embedded-video
       - name: pageflow-internal-links
       - name: pageflow-outline-navigation-bar
       - name: pageflow-linkmap-page
