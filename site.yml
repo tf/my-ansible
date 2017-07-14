@@ -20,6 +20,8 @@
       - name: pageflow-linkmap-page
       - name: pageflow-panorama
       - name: pageflow-new-pages-box
+      - name: pageflow-text-page
+      - name: state_machine_job
 
   tasks:
     - include: tasks/ssh.yml
