@@ -21,6 +21,7 @@
       - name: pageflow-panorama
       - name: pageflow-new-pages-box
       - name: pageflow-text-page
+      - name: pageflow-vr
       - name: state_machine_job
 
   tasks:
