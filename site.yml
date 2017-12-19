@@ -23,6 +23,7 @@
       - name: pageflow-text-page
       - name: pageflow-vr
       - name: state_machine_job
+      - name: cert_watch
 
   tasks:
     - include: tasks/ssh.yml
