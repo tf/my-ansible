@@ -1,28 +1,27 @@
 - block:
-  - name: Rum uname -s
-    command: 'uname -s'
-    register: docker_uname_s
+  - name: Rum lsb_release -cs
+    command: 'lsb_release -cs'
+    register: docker_lsb_release
     changed_when: False
 
-  - name: Rum uname -m
-    command: 'uname -m'
-    register: docker_uname_m
-    changed_when: False
+  - name: Install packages to allow apt to use a repository over HTTPS
+    apt: name={{item}} state=installed update_cache=yes
+    with_items:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
 
   - name: "Add docker apt key"
-    apt_key: keyserver=hkp://ha.pool.sks-keyservers.net:80 id=58118E89F3A912897C070ADBF76221572C52609D
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
 
   - name: "Add docker apt repository"
-    apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-xenial main'
+    apt_repository: repo='deb [arch=amd64] https://download.docker.com/linux/ubuntu {{docker_lsb_release}} stable'
 
   - name: "Install docker"
-    apt: name=docker-engine state=installed update_cache=yes
-
-  - name: "Install docker-compose"
-    get_url:
-      url: https://github.com/docker/compose/releases/download/1.9.0/docker-compose-{{ docker_uname_s.stdout }}-{{ docker_uname_m.stdout }}
-      dest: /usr/local/bin/docker-compose
-      mode: 0555
+    apt: name=docker-ce state=installed update_cache=yes
 
   - name: "Add user to docker group"
     user:
