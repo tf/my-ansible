@@ -6,6 +6,6 @@
     apt_repository: repo='deb http://repository.spotify.com stable non-free'
 
   - name: "Install Spotify client"
-    apt: name=spotify-client state=installed update_cache=yes
+    apt: name=spotify-client state=installed update_cache=yes allow_unauthenticated=yes
 
   become: yes
