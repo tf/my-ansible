@@ -15,8 +15,11 @@
       - name: pageflow
       - name: pageflow-chart
       - name: pageflow-embedded-video
+      - name: pageflow-external-links
       - name: pageflow-internal-links
       - name: pageflow-outline-navigation-bar
+      - name: pageflow-progress-navigation-bar
+      - name: pageflow-public-i18n
       - name: pageflow-linkmap-page
       - name: pageflow-panorama
       - name: pageflow-new-pages-box
