@@ -18,7 +18,7 @@
       state: present
 
   - name: "Add docker apt repository"
-    apt_repository: repo='deb [arch=amd64] https://download.docker.com/linux/ubuntu {{docker_lsb_release}} stable'
+    apt_repository: repo='deb [arch=amd64] https://download.docker.com/linux/ubuntu {{docker_lsb_release.stdout}} stable'
 
   - name: "Install docker"
     apt: name=docker-ce state=installed update_cache=yes
