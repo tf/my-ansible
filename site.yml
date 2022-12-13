@@ -13,6 +13,7 @@
 
     gh_repositories:
       - name: pageflow
+      - name: pageflow-before-after
       - name: pageflow-chart
       - name: pageflow-embedded-video
       - name: pageflow-external-links
@@ -22,11 +23,15 @@
       - name: pageflow-public-i18n
       - name: pageflow-linkmap-page
       - name: pageflow-panorama
+      - name: pageflow-parent-page-box
       - name: pageflow-new-pages-box
       - name: pageflow-text-page
+      - name: pageflow-sitemap
+      - name: pageflow-timeline-page
       - name: pageflow-vr
       - name: state_machine_job
       - name: cert_watch
+      - name: activeadmin-searchable_select
 
   tasks:
     - include: tasks/ssh.yml
