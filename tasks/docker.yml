@@ -1,8 +1,16 @@
 - block:
-  - name: Rum lsb_release -cs
+  - name: Run lsb_release -cs
     command: 'lsb_release -cs'
     register: docker_lsb_release
     changed_when: False
+
+  - name: Run uname -s
+    command: 'uname -s'
+    register: docker_uname_s
+
+  - name: Run uname -m
+    command: 'uname -m'
+    register: docker_uname_m
 
   - name: Install packages to allow apt to use a repository over HTTPS
     apt: name={{item}} state=installed update_cache=yes
@@ -28,6 +36,12 @@
       name: tfischbach
       groups: docker
       append: yes
+
+  - name: "Install docker-compose"
+    get_url:
+      url: https://github.com/docker/compose/releases/download/1.18.0/docker-compose-{{ docker_uname_s.stdout }}-{{ docker_uname_m.stdout }}
+      dest: /usr/local/bin/docker-compose
+      mode: 0555
 
   become: yes
   tags:

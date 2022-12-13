@@ -7,6 +7,8 @@
     apt:
       name: emacs-goodies-el
   become: true
+  tags:
+  - emacs
 
 - name: "Checkout emacs config"
   git: repo=git@github.com:tf/emacs-config
