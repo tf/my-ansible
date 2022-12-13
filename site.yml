@@ -31,6 +31,7 @@
   tasks:
     - include: tasks/ssh.yml
     - include: tasks/git.yml
+    - include: tasks/gems.yml
 
     - include: tasks/chrome.yml
     - include: tasks/docker.yml

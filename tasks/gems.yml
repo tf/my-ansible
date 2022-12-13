@@ -1,0 +1,7 @@
+- block:
+  - name: 'Install hub gem'
+    command: 'gem install hub'
+  - name: 'Install pr_log gem'
+    command: 'gem install pr_log'
+  tags:
+    - gems
