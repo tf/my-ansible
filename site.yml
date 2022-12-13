@@ -41,6 +41,7 @@
     - include: tasks/chrome.yml
     - include: tasks/docker.yml
     - include: tasks/spotify.yml
+    - include: tasks/gimp.yml
 
     - include: tasks/dotfiles.yml
     - include: tasks/emacs.yml
