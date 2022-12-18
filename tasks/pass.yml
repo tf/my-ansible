@@ -5,3 +5,7 @@
 - name: "Checkout password store"
   git: repo=git@gitlab.codevise.de:ops/pass
        dest=~/.password-store
+
+- name: "Checkout tf password store"
+  git: repo=git@github.com:tf/pass
+       dest=~/.tf-password-store

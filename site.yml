@@ -5,11 +5,6 @@
         port: 5100
       - name: hosted-pageflow.localhost
         port: 5101
-      - name: wdr-pageflow.localhost
-        port: 5102
-      - name: digit.localhost
-        server_name: wdr-digit.localhost swr-digit.localhost
-        port: 5200
 
     gh_repositories:
       - name: pageflow
@@ -34,41 +29,37 @@
       - name: activeadmin-searchable_select
 
   tasks:
-    - include: tasks/ssh.yml
-    - include: tasks/git.yml
-    - include: tasks/gems.yml
+#    - include: tasks/ssh.yml
+#    - include: tasks/gems.yml
 
-    - include: tasks/chrome.yml
-    - include: tasks/docker.yml
-    - include: tasks/spotify.yml
-    - include: tasks/gimp.yml
+    - include_tasks: tasks/chrome.yml
+    - include_tasks: tasks/docker.yml
+    - include_tasks: tasks/spotify.yml
+    - include_tasks: tasks/gimp.yml
 
-    - include: tasks/dotfiles.yml
-    - include: tasks/emacs.yml
-    - include: tasks/pass.yml
+    - include_tasks: tasks/dotfiles.yml
+    - include_tasks: tasks/emacs.yml
+    - include_tasks: tasks/pass.yml
 
-    - include: tasks/gh_repositories.yml
+    - include_tasks: tasks/gh_repositories.yml
 
-    - include: tasks/dnsmasq.yml
-    - include: tasks/mysql.yml
-    - include: tasks/nginx.yml
-    - include: tasks/redis.yml
+    - include_tasks: tasks/nginx.yml
 
   handlers:
-    - include: handlers/dnsmasq.yml
-    - include: handlers/ssh.yml
-    - include: handlers/nginx.yml
+    - include_tasks: handlers/ssh.yml
+    - include_tasks: handlers/nginx.yml
 
   roles:
-    - { role: rvm_io.rvm1-ruby,
-        rvm1_rubies: ['ruby-2.3.1'],
-        rvm1_install_flags: '--auto-dotfiles --user-install',
-        rvm1_install_path: '/home/{{ ansible_ssh_user }}/.rvm',
-        rvm1_user: 'tfischbach',
-        rvm1_rvm_check_for_updates: false
-      }
-    - role: leonidas.nvm
-      nvm:
-        user: 'tfischbach'
-        version: HEAD
-        node_version: '6.9'
+#    - { role: rvm.ruby,
+#        rvm1_rubies: ['ruby-2.6.10'],
+#        rvm1_install_flags: '--auto-dotfiles --user-install',
+#        rvm1_install_path: '/home/tfischbach/.rvm',
+#        rvm1_user: 'tfischbach',
+#        rvm1_rvm_check_for_updates: false
+#      }
+#    - role: leonidas.nvm
+#      nvm:
+#        user: 'tfischbach'
+#        version: HEAD
+#        node_version: '12.18.0'
+#

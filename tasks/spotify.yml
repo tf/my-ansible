@@ -1,11 +1,5 @@
-- block:
-  - name: "Add Spotify apt key"
-    apt_key: keyserver=keyserver.ubuntu.com id=BBEBDCB318AD50EC6865090613B00F1FD2C19886
-
-  - name: "Add Spotify apt repository"
-    apt_repository: repo='deb http://repository.spotify.com stable non-free'
-
-  - name: "Install Spotify client"
-    apt: name=spotify-client state=installed update_cache=yes allow_unauthenticated=yes
-
-  become: yes
+- name: "Install Spotify"
+  community.general.snap:
+    name:
+      - spotify
+  become: true

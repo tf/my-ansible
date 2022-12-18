@@ -2,14 +2,11 @@
   - name: "Install emacs"
     apt:
       name: emacs
-
-  - name: "Install emacs goodies"
-    apt:
-      name: emacs-goodies-el
   become: true
   tags:
   - emacs
 
 - name: "Checkout emacs config"
-  git: repo=git@github.com:tf/emacs-config
+  git: repo=git@github.com:tf/prelude
+       version=personal
        dest=~/.emacs.d

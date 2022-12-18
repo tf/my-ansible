@@ -12,8 +12,12 @@
     - gemrc
     - ssh/config
 
-- name: "Source .profile.d files from .profile"
-  lineinfile: dest=~/.profile
+- name: "Source .profile.d files"
+  lineinfile: dest=~/{{item}}
               insertafter=EOF
               line="for conf in ~/.profile.d/*[^~]; do . $conf; done"
               state=present
+  with_items:
+    - .profile
+    - .bashrc
+

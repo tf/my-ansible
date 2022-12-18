@@ -4,16 +4,8 @@
     register: docker_lsb_release
     changed_when: False
 
-  - name: Run uname -s
-    command: 'uname -s'
-    register: docker_uname_s
-
-  - name: Run uname -m
-    command: 'uname -m'
-    register: docker_uname_m
-
   - name: Install packages to allow apt to use a repository over HTTPS
-    apt: name={{item}} state=installed update_cache=yes
+    apt: name={{item}} update_cache=yes
     with_items:
       - apt-transport-https
       - ca-certificates
@@ -29,19 +21,13 @@
     apt_repository: repo='deb [arch=amd64] https://download.docker.com/linux/ubuntu {{docker_lsb_release.stdout}} stable'
 
   - name: "Install docker"
-    apt: name=docker-ce state=installed update_cache=yes
+    apt: name=docker-ce update_cache=yes
 
   - name: "Add user to docker group"
     user:
       name: tfischbach
       groups: docker
       append: yes
-
-  - name: "Install docker-compose"
-    get_url:
-      url: https://github.com/docker/compose/releases/download/1.18.0/docker-compose-{{ docker_uname_s.stdout }}-{{ docker_uname_m.stdout }}
-      dest: /usr/local/bin/docker-compose
-      mode: 0555
 
   become: yes
   tags:

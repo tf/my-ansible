@@ -1,6 +1,6 @@
 - block:
   - name: Install the Nginx package
-    apt: name=nginx state=installed update_cache=yes
+    apt: name=nginx update_cache=yes
 
   - name: Create proxies for Rails apps.
     template: src=templates/nginx_proxy_site.j2
