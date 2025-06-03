@@ -4,7 +4,7 @@ Ansible Playbook to setup my computer
 
 ## Requirements
 
-Tested on Ubuntu 16.04.
+Tested on Ubuntu 20.04.
 
 ## Usage
 
@@ -19,3 +19,9 @@ Create variable file with secrets:
 Apply playbook:
 
     $ bin/apply
+
+## Missing
+
+* bin/tfpass
+* bin/spotify-control and key bindings
+* GitHub CLI

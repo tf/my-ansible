@@ -4,3 +4,5 @@ sudo sudo apt-get install software-properties-common curl
 sudo apt-add-repository ppa:ansible/ansible
 sudo apt-get update
 sudo apt-get install ansible
+
+ansible-galaxy install rvm.ruby

@@ -31,6 +31,8 @@
   tasks:
 #    - include: tasks/ssh.yml
 #    - include: tasks/gems.yml
+    - include_tasks: tasks/mysql.yml
+    - include_tasks: tasks/redis.yml
 
     - include_tasks: tasks/chrome.yml
     - include_tasks: tasks/docker.yml
@@ -45,21 +47,19 @@
 
     - include_tasks: tasks/nginx.yml
 
+
   handlers:
-    - include_tasks: handlers/ssh.yml
-    - include_tasks: handlers/nginx.yml
+    - import_tasks: handlers/nginx.yml
 
   roles:
 #    - { role: rvm.ruby,
 #        rvm1_rubies: ['ruby-2.6.10'],
 #        rvm1_install_flags: '--auto-dotfiles --user-install',
 #        rvm1_install_path: '/home/tfischbach/.rvm',
-#        rvm1_user: 'tfischbach',
-#        rvm1_rvm_check_for_updates: false
+#        rvm1_user: 'tfischbach'
 #      }
 #    - role: leonidas.nvm
 #      nvm:
 #        user: 'tfischbach'
 #        version: HEAD
 #        node_version: '12.18.0'
-#
